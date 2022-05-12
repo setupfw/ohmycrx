@@ -36,6 +36,8 @@ cd ohmycrx
 make all
 ```
 
+若要考虑发包，请备份保管好 `dist/*.pem`
+
 ## 安装
 
 打开生成目录

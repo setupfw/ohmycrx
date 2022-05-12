@@ -1,5 +1,5 @@
 diff --git a/background/settings.ts b/background/settings.ts
-index 49b7482..030a161 100644
+index 49b7482..4e2e41f 100644
 --- a/background/settings.ts
 +++ b/background/settings.ts
 @@ -278,13 +278,13 @@ export const defaults_ = As_<Readonly<SettingsWithDefaults> & SafeObject>({
@@ -47,7 +47,7 @@ index 49b7482..030a161 100644
 +map w moveTabToNewWindow
 +
 +" 复制链接标题文本
-+map <a-c> LinkHints.activateCopyLinkText
++" map <a-c> LinkHints.activateCopyLinkText
 +
 +unmap zH
 +unmap zL`,

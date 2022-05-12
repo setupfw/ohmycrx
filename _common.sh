@@ -45,8 +45,12 @@ pack_by_chromium() {
 	[[ -v BUILDNAME ]] || return 1
 
 	mkdir -p dist && cd dist || return 1
-	rm -rf "$BUILDNAME."*
-	chromium --pack-extension="$BUILDNAME"
+	rm -rf "$BUILDNAME."crx
+	if [ -f "$BUILDNAME.pem" ]; then
+		chromium --pack-extension="$BUILDNAME" --pack-extension-key="$BUILDNAME.pem"
+	else
+		chromium --pack-extension="$BUILDNAME"
+	fi
 	cd ..
 }
 
