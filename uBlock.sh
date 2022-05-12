@@ -32,7 +32,7 @@ buildto=$(create_build_path)
 disto=$(create_dist_path)
 
 docker run --rm -v "$buildto":/app/dist/build "$imgid"
-cp -r "$buildto/uBlock0.chromium/*" "$disto"
+cp -r "$buildto/uBlock0.chromium/"* "$disto"
 
 pack_by_chromium
 
