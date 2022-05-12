@@ -1,3 +1,19 @@
+diff --git a/src/background/index.ts b/src/background/index.ts
+index 2636914..b502fbd 100644
+--- a/src/background/index.ts
++++ b/src/background/index.ts
+@@ -77,11 +77,9 @@ if (WATCH) {
+ } else if (!__DEBUG__){
+     chrome.runtime.onInstalled.addListener(({reason}) => {
+         if (reason === 'install') {
+-            chrome.tabs.create({url: getHelpURL()});
+         }
+     });
+ 
+-    chrome.runtime.setUninstallURL(UNINSTALL_URL);
+ }
+ 
+ makeChromiumHappy();
 diff --git a/src/defaults.ts b/src/defaults.ts
 index 69ba9b9..6c5f981 100644
 --- a/src/defaults.ts
