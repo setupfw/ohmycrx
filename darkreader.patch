@@ -1,0 +1,20 @@
+diff --git a/src/defaults.ts b/src/defaults.ts
+index 69ba9b9..6c5f981 100644
+--- a/src/defaults.ts
++++ b/src/defaults.ts
+@@ -15,11 +15,11 @@ export const DEFAULT_COLORS = {
+ };
+ 
+ export const DEFAULT_THEME: Theme = {
+-    mode: 1,
+-    brightness: 100,
+-    contrast: 100,
++    mode: 0,
++    brightness: 90,
++    contrast: 110,
+     grayscale: 0,
+-    sepia: 0,
++    sepia: 15,
+     useFont: false,
+     fontFamily: isMacOS ? 'Helvetica Neue' : isWindows ? 'Segoe UI' : 'Open Sans',
+     textStroke: 0,
