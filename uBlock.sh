@@ -4,7 +4,7 @@ assets=https://gitcode.net/mirrors/uBlockOrigin/uAssets.git
 tag=1.42.4
 dst=~/crxbuild
 
-cd $(mktemp -d) && git clone -b $tag --depth=1 $src .
+cd "$(mktemp -d)" && git clone -b "$tag" --depth=1 "$src" .
 sed -n "/url =/ s#=.*#= $assets#" .gitmodules
 cat <<END >Dockerfile
 FROM ubuntu:latest
@@ -21,8 +21,8 @@ CMD make chromium
 END
 mkdir -p build "$dst"
 cid=$(docker build -t crxbuilder -q .)
-docker run --rm -v $(pwd)/build:/app/dist/build $cid
+docker run --rm -v "$(pwd)/build":/app/dist/build "$cid"
 cp -r build/uBlock0.chromium "$dst/uBlock"
 (cd "$dst" && rm -rf "uBlock*" && chromium --pack-extension=uBlock)
 echo
-echo uBlock build container id: $cid
+echo uBlock build container id: "$cid"
