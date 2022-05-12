@@ -1,0 +1,81 @@
+diff --git a/background/settings.ts b/background/settings.ts
+index 45bdbcc..8ef08c0 100644
+--- a/background/settings.ts
++++ b/background/settings.ts
+@@ -282,13 +282,13 @@ export const defaults_ = As_<Readonly<SettingsWithDefaults> & SafeObject>({
+     __proto__: null as never,
+     allBrowserUrls: false,
+     autoDarkMode: 2,
+-    autoReduceMotion: 0,
++    autoReduceMotion: 2,
+     clipSub: `p=^git@([^/:]+):=https://$1/=
+ s@^https://(?:www\\.)?google\\.com(?:\\.[^/]+)?/url\\?(?:[^&#]+&)*?url=([^&#]+)@$1@,matched,decodecomp
+ p@^https://item\\.m\\.jd\\.com/product/(\\d+)\\.html\\b@https://item.jd.com/$1.html@`,
+     exclusionListenHash: true,
+     exclusionOnlyFirstMatch: false,
+-    exclusionRules: [{pattern: ":https://mail.google.com/", passKeys: ""}] as ExclusionsNS.StoredRule[],
++    exclusionRules: [{pattern: ":https://mail.google.com/", passKeys: ""},{pattern: ":https://www.zhihu.com/", passKeys: "c j k o "}],
+     extAllowList: OnChrome
+ ? `# modified versions of X New Tab and PDF Viewer,
+ # NewTab Adapter, and Shortcuts Forwarding Tool
+@@ -310,28 +310,42 @@ nickyfeng@edgetranslate.com
+ saladict@crimx.com`
+ : "",
+     filterLinkHints: false,
+-    grabBackFocus: false,
++    grabBackFocus: true,
+     hideHud: false,
+     ignoreCapsLock: 0,
+-    ignoreKeyboardLayout: 0,
++    ignoreKeyboardLayout: 2,
+     keyboard: [560, 33],
+-    keyupTime: 120,
+-    keyMappings: "",
+-    linkHintCharacters: "sadjklewcmpgh",
++    keyupTime: 100,
++    keyMappings: `" 复制当前标签页
++map yt duplicateTab active=false
++
++" 键盘打开多条链接
++map f LinkHints.activateWithQueue
++" 单次点击模拟
++map F LinkHints.activate
++" 在新标签页打开
++map <a-f> LinkHints.activateOpenInNewForegroundTab
++
++" 分离当前标签页到新窗口
++map w moveTabToNewWindow
++
++" 复制链接标题文本
++map <a-c> LinkHints.activateCopyLinkText`,
++    linkHintCharacters: "sfweraqt",
+     linkHintNumbers: "0123456789",
+     localeEncoding: "gbk",
+     mapModifier: 0,
+     mouseReachable: true,
+-    /** mutable */ newTabUrl: "",
++    newTabUrl: "pages/blank.html",
+     nextPatterns: "\u4e0b\u4e00\u5c01,\u4e0b\u9875,\u4e0b\u4e00\u9875,\u4e0b\u4e00\u7ae0,\u540e\u4e00\u9875\
+ ,\u4e0b\u4e00\u5f20,next,more,newer,>,\u203a,\u2192,\xbb,\u226b,>>",
+     omniBlockList: "",
+     passEsc: "[aria-controls],[role=combobox],#kw.s_ipt", // MS Bing / Google / Baidu
+     previousPatterns: "\u4e0a\u4e00\u5c01,\u4e0a\u9875,\u4e0a\u4e00\u9875,\u4e0a\u4e00\u7ae0,\u524d\u4e00\u9875\
+ ,\u4e0a\u4e00\u5f20,prev,previous,back,older,<,\u2039,\u2190,\xab,\u226a,<<",
+-    regexFindMode: false,
+-    scrollStepSize: 100,
+-    searchUrl: (navigator.language as string).startsWith("zh") ? "https://www.baidu.com/s?ie=utf-8&wd=%s \u767e\u5ea6"
++    regexFindMode: true,
++    scrollStepSize: 120,
++    searchUrl: (navigator.language as string).startsWith("zh") ? "https://cn.bing.com/search?q=%s"
+       : "https://www.google.com/search?q=%s Google",
+     searchEngines: (navigator.language as string).startsWith("zh")
+ ? `b|ba|baidu|Baidu|\u767e\u5ea6: https://www.baidu.com/s?ie=utf-8&wd=%s \\
+@@ -425,7 +439,7 @@ gh|github: https://github.com/search?q=$s \\
+ ge|gitee: https://search.gitee.com/?type=repository&q=$s \\
+   blank=https://gitee.com/ Gitee 仓库
+ js\\:|Js: javascript:\\ $S; JavaScript`,
+-    showActionIcon: true,
++    showActionIcon: false,
+     showAdvancedCommands: true,
+     showAdvancedOptions: true,
+     showInIncognito: false,
