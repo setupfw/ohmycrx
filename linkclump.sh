@@ -10,6 +10,7 @@ git_clone_repo
 disto=$(create_dist_path)
 
 (at_repo &&
+    git apply "../../$BUILDNAME.patch" &&
 	rm -rf linkclump.*.zip &&
 	docker run -v "$(pwd)":/app frekele/ant:1.10.3-jdk8u111 ant -f /app/build.xml &&
 	unzip linkclump.*.zip -d "$disto")

@@ -9,6 +9,7 @@ git_clone_repo
 
 (
 	at_repo &&
+    	git apply "../../$BUILDNAME.patch" &&
 		cat <<END >Dockerfile
 FROM node:lts-slim
 RUN npm config set registry https://registry.npmmirror.com
