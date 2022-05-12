@@ -1,0 +1,20 @@
+diff --git a/src/background.js b/src/background.js
+index b7332e0..f531a25 100644
+--- a/src/background.js
++++ b/src/background.js
+@@ -207,6 +207,7 @@ if (!settingsManager.isInit()) {
+ 	});
+ 	
+ 	// pop up window to show tour and options page
++	/*
+ 	chrome.windows.create({
+ 		url: document.location.protocol + "//" + document.location.host + "/pages/options.html?init=true",
+ 		width: 800,
+@@ -214,6 +215,7 @@ if (!settingsManager.isInit()) {
+ 		left: screen.width / 2 - 800 / 2,
+ 		top: screen.height / 2 - 700 / 2
+ 	});
++	*/
+ } else if (!settingsManager.isLatest()) {
+ 	settingsManager.update();
+ }
