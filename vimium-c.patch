@@ -1,8 +1,8 @@
 diff --git a/background/settings.ts b/background/settings.ts
-index 45bdbcc..8ef08c0 100644
+index 49b7482..030a161 100644
 --- a/background/settings.ts
 +++ b/background/settings.ts
-@@ -282,13 +282,13 @@ export const defaults_ = As_<Readonly<SettingsWithDefaults> & SafeObject>({
+@@ -278,13 +278,13 @@ export const defaults_ = As_<Readonly<SettingsWithDefaults> & SafeObject>({
      __proto__: null as never,
      allBrowserUrls: false,
      autoDarkMode: 2,
@@ -18,7 +18,7 @@ index 45bdbcc..8ef08c0 100644
      extAllowList: OnChrome
  ? `# modified versions of X New Tab and PDF Viewer,
  # NewTab Adapter, and Shortcuts Forwarding Tool
-@@ -310,28 +310,42 @@ nickyfeng@edgetranslate.com
+@@ -306,28 +306,45 @@ nickyfeng@edgetranslate.com
  saladict@crimx.com`
  : "",
      filterLinkHints: false,
@@ -47,7 +47,10 @@ index 45bdbcc..8ef08c0 100644
 +map w moveTabToNewWindow
 +
 +" 复制链接标题文本
-+map <a-c> LinkHints.activateCopyLinkText`,
++map <a-c> LinkHints.activateCopyLinkText
++
++unmap zH
++unmap zL`,
 +    linkHintCharacters: "sfweraqt",
      linkHintNumbers: "0123456789",
      localeEncoding: "gbk",
@@ -70,7 +73,7 @@ index 45bdbcc..8ef08c0 100644
        : "https://www.google.com/search?q=%s Google",
      searchEngines: (navigator.language as string).startsWith("zh")
  ? `b|ba|baidu|Baidu|\u767e\u5ea6: https://www.baidu.com/s?ie=utf-8&wd=%s \\
-@@ -425,7 +439,7 @@ gh|github: https://github.com/search?q=$s \\
+@@ -421,7 +438,7 @@ gh|github: https://github.com/search?q=$s \\
  ge|gitee: https://search.gitee.com/?type=repository&q=$s \\
    blank=https://gitee.com/ Gitee 仓库
  js\\:|Js: javascript:\\ $S; JavaScript`,
