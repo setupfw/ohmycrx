@@ -1,9 +1,14 @@
 #!/bin/bash
-src=https://gitee.com/mirrors/gooreplacer.git
-tag=3.12.0
-dst=~/crxbuild
+SRC=https://gitee.com/mirrors/gooreplacer.git
+TAG=v3.12.0
+BUILDNAME=gooreplacer
 
-mkdir -p "$dst"
-cd "$(mktemp -d)" && git clone -b "$tag" --depth=1 "$src" .
-cp -r legacy-js-src/src "$dst/gooreplacer"
-(cd "$dst" && rm -rf "gooreplacer*" && chromium --pack-extension=gooreplacer)
+source ./_common.sh
+
+git_clone_repo
+
+disto=$(create_dist_path)
+
+(at_repo && cp -r legacy-js-src/src/* "$disto")
+
+pack_by_chromium

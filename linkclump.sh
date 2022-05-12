@@ -1,9 +1,17 @@
 #!/bin/bash
-src=https://gitclone.com/github.com/benblack86/linkclump
-dst=~/crxbuild
+SRC=https://gitclone.com/github.com/benblack86/linkclump
+TAG=master
+BUILDNAME=linkclump
 
-mkdir -p "$dst"
-cd "$(mktemp -d)" && git clone --depth=1 "$src" .
-docker run --mount type=bind,source="$(pwd)",target=/app frekele/ant:1.10.3-jdk8u111 ant -f /app/build.xml
-unzip linkclump.2.9.1.zip -d "$dst/linkclump"
-(cd "$dst" && rm -rf "linkclump*" && chromium --pack-extension=linkclump)
+source ./_common.sh
+
+git_clone_repo
+
+disto=$(create_dist_path)
+
+(at_repo &&
+	rm -rf linkclump.*.zip &&
+	docker run -v "$(pwd)":/app frekele/ant:1.10.3-jdk8u111 ant -f /app/build.xml &&
+	unzip linkclump.*.zip -d "$disto")
+
+pack_by_chromium

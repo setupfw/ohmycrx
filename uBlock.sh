@@ -1,12 +1,17 @@
 #!/bin/bash
-src=https://gitcode.net/mirrors/gorhill/uBlock.git
-assets=https://gitcode.net/mirrors/uBlockOrigin/uAssets.git
-tag=1.42.4
-dst=~/crxbuild
+SRC=https://gitcode.net/mirrors/gorhill/uBlock.git
+ASSETS=https://gitcode.net/mirrors/uBlockOrigin/uAssets.git
+TAG=1.42.4
+BUILDNAME=uBlock
 
-cd "$(mktemp -d)" && git clone -b "$tag" --depth=1 "$src" .
-sed -n "/url =/ s#=.*#= $assets#" .gitmodules
-cat <<END >Dockerfile
+source ./_common.sh
+
+git_clone_repo
+
+(
+	at_repo &&
+		sed -n "/url =/ s#=.*#= $ASSETS#" .gitmodules &&
+		cat <<END >Dockerfile
 FROM ubuntu:latest
 WORKDIR /app
 RUN sed -i -E "s#http://((cn.)?archive|security).ubuntu.com#http://mirrors.cloud.tencent.com#g" /etc/apt/sources.list
@@ -19,10 +24,16 @@ COPY . .
 VOLUME /app/dist/build
 CMD make chromium
 END
-mkdir -p build "$dst"
-cid=$(docker build -t crxbuilder -q .)
-docker run --rm -v "$(pwd)/build":/app/dist/build "$cid"
-cp -r build/uBlock0.chromium "$dst/uBlock"
-(cd "$dst" && rm -rf "uBlock*" && chromium --pack-extension=uBlock)
-echo
-echo uBlock build container id: "$cid"
+)
+
+imgid=$(build_container)
+
+buildto=$(create_build_path)
+disto=$(create_dist_path)
+
+docker run --rm -v "$buildto":/app/dist/build "$imgid"
+cp -r "$buildto/uBlock0.chromium/*" "$disto"
+
+pack_by_chromium
+
+print_builder "$imgid"
