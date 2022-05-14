@@ -35,6 +35,8 @@ else {
     $wsShell.Save()
 
     Write-Host "==> Installed new Chromium!"
+    Write-Host "tip(disable google api): cmd /c setx GOOGLE_API_KEY no"
+    Write-Host
     if ($autorun -and !(Get-Process chrome -ErrorAction Ignore)) { & "$instancedir\chrome.exe" }
 }
 
