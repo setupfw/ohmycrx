@@ -1,9 +1,9 @@
 $appid = "purechromium"
-$accessible = Test-Connection www.google.com -Count 1 -TimeoutSeconds 2 -Quiet
+$npmmirror = $args[0] -eq 'npmmirror'
 $autorun = $true
 
-$puppeteer_metainfo_url = if ($accessible) { "https://raw.githubusercontent.com/puppeteer/puppeteer/main/src/revisions.ts" } else { "https://gitcode.net/mirrors/puppeteer/puppeteer/-/raw/main/src/revisions.ts" }
-$download_url_prefix = if ($accessible) { "https://commondatastorage.googleapis.com" } else { "https://cdn.npmmirror.com/binaries" }
+$puppeteer_metainfo_url = if ($npmmirror) { "https://gitcode.net/mirrors/puppeteer/puppeteer/-/raw/main/src/revisions.ts" } else { "https://raw.githubusercontent.com/puppeteer/puppeteer/main/src/revisions.ts" }
+$download_url_prefix = if ($npmmirror) { "https://cdn.npmmirror.com/binaries" } else { "https://commondatastorage.googleapis.com" }
 
     (Invoke-WebRequest -useb $puppeteer_metainfo_url).Content -match "(?<=chromium: ')\d+(?=',)" > $null
 $version = $Matches[0]
