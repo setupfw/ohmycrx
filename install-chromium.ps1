@@ -23,7 +23,7 @@ if ($null -ne $friendlyVersion) {
 else {
     mkdir "$env:TMP\$appid" -f > $null
     $tmpdownload = "$env:TMP\$appid\$version.zip"
-    Invoke-WebRequest "$download_url_prefix/chromium-browser-snapshots/Win_x64/$version/chrome-win.zip" -o $tmpdownload
+    Invoke-WebRequest -useb "$download_url_prefix/chromium-browser-snapshots/Win_x64/$version/chrome-win.zip" -o $tmpdownload
 
     Expand-Archive -Path $tmpdownload -DestinationPath $appdir
     Move-Item "$appdir\chrome-win" "$instancedir"
